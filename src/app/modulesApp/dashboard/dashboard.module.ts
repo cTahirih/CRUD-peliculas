@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // Angular material
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {
-  MatButtonModule,
+  MatButtonModule, MatDatepickerModule,
   MatDialogModule,
   MatFormFieldModule,
-  MatInputModule,
+  MatInputModule, MatNativeDateModule,
   MatPaginatorModule, MatSelectModule,
-  MatSidenavModule, MatSortModule, MatTableModule
+  MatSidenavModule, MatSortModule, MatTableModule,
 } from '@angular/material';
 
 import { DashboardRouting } from './dashboard.routing';
@@ -35,18 +35,21 @@ import { PopupEditMovieComponent } from './components/popup-edit-movie/popup-edi
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     DashboardRouting,
     MatToolbarModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatDialogModule,
-    FormsModule,
     MatSidenavModule,
     MatPaginatorModule,
     MatTableModule,
     MatSortModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ]
 })
 export class DashboardModule { }
