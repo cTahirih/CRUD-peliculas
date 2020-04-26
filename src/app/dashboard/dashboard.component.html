@@ -1,0 +1,36 @@
+<ng-container>
+  <mat-toolbar class="navbar sidenav-header">
+    <button class="navbar-toggler" type="button"  mat-button (click)="sidenav.toggle()">
+      <img src="./assets/images/menu.png" width="30" height="30" class="d-inline-block align-top" alt="">
+    </button>
+    <a class="navbar-brand" href="#">
+      <img src="./assets/images/computer.png" width="30" height="30" class="d-inline-block align-top" alt="">
+      DashBoard
+    </a>
+  </mat-toolbar>
+
+  <div class="container-fluid">
+    <mat-sidenav-container class="sidenav-content row">
+      <mat-sidenav
+        #sidenav mode="side" opened class="example-sidenav col-12 col-md-3"
+        [fixedInViewport]="false"
+      >
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item px-0">
+            <a routerLink="/dashboard/home">Inicio</a>
+          </li>
+          <li class="list-group-item px-0">
+            <a routerLink="/dashboard/registro">Registro de Peliculas</a>
+          </li>
+        </ul>
+      </mat-sidenav>
+      <mat-sidenav-content>
+        <div class="col-12">
+          <router-outlet></router-outlet>
+        </div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+
+  <mat-toolbar class="sidenav-footer">Footer</mat-toolbar>
+</ng-container>
