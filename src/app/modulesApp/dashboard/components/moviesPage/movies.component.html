@@ -26,7 +26,7 @@
       <!-- ID Column -->
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+        <td mat-cell *matCellDef="let row, let indx = index"> {{ row.id.substring(0, 8) }} </td>
       </ng-container>
 
       <!-- Name Column -->
@@ -50,13 +50,13 @@
       <!-- Edit/Delete Column -->
       <ng-container matColumnDef="edit">
         <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let row">
+        <td mat-cell *matCellDef="let row, let index = index">
           <div class="row">
             <div class="col px-1">
-              <i class="material-icons color-blue cursor-pointer" (click)="openEditMoviePopup(row.id)">edit</i>
+              <i class="material-icons color-blue cursor-pointer" (click)="openEditMoviePopup(row.id, index)">edit</i>
             </div>
             <div class="col px-1">
-              <i class="material-icons color-red cursor-pointer" (click)="deleteMovie(row.id)">delete</i>
+              <i class="material-icons color-red cursor-pointer" (click)="deleteMovie(row.id, index)">delete</i>
             </div>
           </div>
         </td>

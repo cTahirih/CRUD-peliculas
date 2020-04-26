@@ -44,6 +44,10 @@ export class MoviesService {
       );
   }
 
+  deleteMovie(id: string) {
+    return this.http.delete(`${this.URL_BASE}/movies/${id}.json`);
+  }
+
   private createArrayMovies( moviesObj: object) {
     const MOVIES: MovieDataInterface[] = [];
 

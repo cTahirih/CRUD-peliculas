@@ -67,7 +67,7 @@ export class MoviesComponent implements OnInit {
     });
   }
 
-  openEditMoviePopup(id: number): void {
+  openEditMoviePopup(id: string, i: number): void {
     const dialogRef = this.dialog.open(PopupEditMovieComponent, {
       width: '60%',
       data: {
@@ -79,15 +79,7 @@ export class MoviesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: DataMovie) => {
       if (result.nameMovie) {
-        let index: number;
-        this.movies.map((elm, i) => {
-          if (elm.id === result.id) {
-            index = i;
-          }
-        });
-
-        console.log(index);
-        this.movies[index] = {
+        this.movies[i] = {
           id: result.id,
           nameMovie: result.nameMovie,
           date: date2String(result.date),
@@ -114,10 +106,10 @@ export class MoviesComponent implements OnInit {
       );
   }
 
-  deleteMovie(id: number) {
-    this.movies = this.movies.filter((elm) => elm.id !== id);
-
+  deleteMovie(id: string, index: number) {
+    this.movies.splice(index, 1);
     this.dataSource = new MatTableDataSource(this.movies);
+    this.moviesService.deleteMovie(id);
   }
 
   isActive(value) {
