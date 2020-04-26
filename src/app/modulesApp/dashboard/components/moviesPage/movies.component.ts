@@ -39,7 +39,7 @@ export class MoviesComponent implements OnInit {
     private formBuilder: FormBuilder,
     public dialog: MatDialog
   ) {
-    // Create 100 users
+    // Create n movies
     this.movies = Array.from({length: 5}, (_, k) => createMovies(k + 1, MOVIES, STATE));
 
     // Assign the data to the data source for the table to render
@@ -72,15 +72,17 @@ export class MoviesComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result: DataMovie) => {
-      const newMovie = {
-        id: this.movies.length + 1,
-        nameMovie: result.nameMovie,
-        date: date2String(result.date),
-        state: this.isActive(result.state)
-      };
+      if (result) {
+        const newMovie = {
+          id: this.movies.length + 1,
+          nameMovie: result.nameMovie,
+          date: date2String(result.date),
+          state: this.isActive(result.state)
+        };
 
-      this.movies.push(newMovie);
-      this.dataSource = new MatTableDataSource(this.movies);
+        this.movies.push(newMovie);
+        this.dataSource = new MatTableDataSource(this.movies);
+      }
     });
   }
 
@@ -94,8 +96,12 @@ export class MoviesComponent implements OnInit {
       }
     });
 
+    this.afterClosedPopup(dialogRef, id - 1);
+  }
+
+  afterClosedPopup(dialogRef, id) {
     dialogRef.afterClosed().subscribe(result => {
-      this.movies[id-1] = {
+      this.movies[id] = {
         id,
         nameMovie: result.nameMovie,
         date: date2String(result.date),
@@ -107,8 +113,7 @@ export class MoviesComponent implements OnInit {
   }
 
   deleteMovie(id: number) {
-    console.log(this.movies.filter((elm) => elm.id === id));
-    this.movies = this.movies.filter((elm) => elm.id !== id)
+    this.movies = this.movies.filter((elm) => elm.id !== id);
 
     this.dataSource = new MatTableDataSource(this.movies);
   }

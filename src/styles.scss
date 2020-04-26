@@ -33,6 +33,13 @@
   }
 }
 
+.color-red {
+  color: #dd2e44;
+  &:hover {
+    color: #ff4458;
+  }
+}
+
 .cursor-pointer {
   cursor: pointer;
 }

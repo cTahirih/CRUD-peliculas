@@ -12,27 +12,27 @@
   <div class="container-fluid">
     <mat-sidenav-container class="sidenav-content row">
       <mat-sidenav
-        #sidenav mode="side" opened class="example-sidenav col-12 col-md-3"
+        #sidenav mode="over"  opened="false" class="example-sidenav col-12 col-md-3"
         [fixedInViewport]="false"
       >
         <ul class="list-group list-group-flush">
           <li class="list-group-item px-0">
-            <a routerLink="/dashboard/home">Dashboard</a>
+            <a routerLink="/dashboard/home" (click)="sidenav.toggle()">Dashboard</a>
           </li>
           <li class="list-group-item px-0">
-            <a routerLink="/dashboard/movies">Películas</a>
+            <a routerLink="/dashboard/movies" (click)="sidenav.toggle()">Películas</a>
           </li>
           <li class="list-group-item px-0">
-            <a routerLink="/dashboard/home">Turnos</a>
+            <a routerLink="/dashboard/home" (click)="sidenav.toggle()">Turnos</a>
           </li>
           <li class="list-group-item px-0">
-            <a routerLink="/dashboard/home">Administradores</a>
+            <a routerLink="/dashboard/home" (click)="sidenav.toggle()">Administradores</a>
           </li>
           <li class="list-group-item px-0">
-            <a routerLink="/dashboard/home">Perfil</a>
+            <a routerLink="/dashboard/home" (click)="sidenav.toggle()">Perfil</a>
           </li>
           <li class="list-group-item px-0">
-            <a routerLink="/home/login">Cerrar Sesión</a>
+            <a routerLink="/home/login" (click)="sidenav.toggle()">Cerrar Sesión</a>
           </li>
         </ul>
       </mat-sidenav>
