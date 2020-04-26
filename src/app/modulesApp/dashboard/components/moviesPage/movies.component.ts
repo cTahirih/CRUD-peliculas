@@ -88,18 +88,29 @@ export class MoviesComponent implements OnInit {
     const dialogRef = this.dialog.open(PopupEditMovieComponent, {
       width: '60%',
       data: {
-        id
+        id,
+        type: 'edit',
+        data: this.movies.filter((elm) => elm.id === id)[0]
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result);
+      this.movies[id-1] = {
+        id,
+        nameMovie: result.nameMovie,
+        date: date2String(result.date),
+        state: this.isActive(result.state)
+      };
+
+      this.dataSource = new MatTableDataSource(this.movies);
     });
   }
 
   deleteMovie(id: number) {
     console.log(this.movies.filter((elm) => elm.id === id));
+    this.movies = this.movies.filter((elm) => elm.id !== id)
+
+    this.dataSource = new MatTableDataSource(this.movies);
   }
 
   isActive(value) {

@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import {DataMovie} from '../../interfaces/movie.interface';
 
 @Component({
   selector: 'app-form-movie',
@@ -20,6 +21,9 @@ export class FormMovieComponent implements OnInit {
     private formBuilder: FormBuilder
     ) {
     this.generateForm();
+    if (this.data.type === 'edit') {
+      this.editMovie(this.data.data);
+    }
   }
 
   ngOnInit() {
@@ -36,5 +40,14 @@ export class FormMovieComponent implements OnInit {
       date: ['', [Validators.required]],
       state: ['', [Validators.required]],
     });
+  }
+
+  editMovie(data: DataMovie) {
+    this.formMovie.setValue({
+      id: data.id,
+      nameMovie: data.nameMovie,
+      date: data.date,
+      state: data.state === 'Activo' ? 'active-0' : 'inactive-1',
+    })
   }
 }
