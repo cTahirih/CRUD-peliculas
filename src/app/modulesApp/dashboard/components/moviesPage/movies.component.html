@@ -20,7 +20,11 @@
     <input matInput (keyup)="applyFilter($event)" placeholder="Ejm. Jason Bourne">
   </mat-form-field>
 
-  <app-card-alerts *ngIf="movies.length === 0"></app-card-alerts>
+  <app-card-alerts
+    [icon]="'error_outline'"
+    [message]="'No hay registros'"
+    [styleAlert]="'alert-warning'"
+    *ngIf="!movies || movies.length === 0" async></app-card-alerts>
 
   <div class="mat-elevation-z8" *ngIf="movies.length > 0">
     <table mat-table [dataSource]="dataSource" matSort>

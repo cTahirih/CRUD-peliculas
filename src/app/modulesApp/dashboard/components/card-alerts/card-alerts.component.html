@@ -1,9 +1,9 @@
 <div class="row">
   <div class="col">
-    <div class="alert alert-warning text-center m-t-3">
-      <h4 class="alert-heading">No hay registros</h4>
+    <div class="alert text-center m-t-3" [ngClass]="styleAlert">
+      <h4 class="alert-heading">{{ message }}</h4>
       <p class="mt-3 mb-2">
-        <i class="material-icons">error_outline</i>
+        <i class="material-icons">{{ icon }}</i>
       </p>
     </div>
   </div>
