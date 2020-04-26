@@ -32,7 +32,7 @@
             <a routerLink="/dashboard/home" (click)="sidenav.toggle()">Perfil</a>
           </li>
           <li class="list-group-item px-0">
-            <a routerLink="/home/login" (click)="sidenav.toggle()">Cerrar Sesión</a>
+            <a (click)="logOut()">Cerrar Sesión</a>
           </li>
         </ul>
       </mat-sidenav>
