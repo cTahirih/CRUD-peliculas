@@ -4,10 +4,17 @@ import { CommonModule } from '@angular/common';
 
 import { RegisterUserComponent } from './components/register-user/register-user.component';
 import { HomeComponent } from './components/home/home.component';
+import {LoginComponent} from '../login/login.component';
+import {LoginPageComponent} from '../login/components/login-page/login-page.component';
+import {DashboardComponent} from './dashboard.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'registro', component: RegisterUserComponent }
+  {
+    path: '', component: DashboardComponent,
+    children: [
+      {path: 'home', component: HomeComponent},
+    ]
+  }
 ];
 
 @NgModule({

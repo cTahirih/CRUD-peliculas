@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login-form.component.scss'],
 })
 export class LoginFormComponent implements OnInit {
-  @HostBinding('class') class = 'col-12 mt-5 mt-md-0 col-md-5 col-lg-4 d-flex align-items-center justify-content-center h-min';
+  @HostBinding('class') class = 'col-12 mt-5 mt-md-0 col-md-5 d-flex align-items-center justify-content-center h-min';
   formLogin: any;
 
   constructor(

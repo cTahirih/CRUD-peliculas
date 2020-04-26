@@ -1,10 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { LoginFormComponent } from './components/login-form/login-form.component';
+
+import { LoginComponent } from './login.component';
+import { LoginPageComponent } from './components/login-page/login-page.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginFormComponent }
+  {path: '', component: LoginComponent,
+    children: [
+      {path: 'login', component: LoginPageComponent},
+    ]
+  }
 ];
 
 @NgModule({
