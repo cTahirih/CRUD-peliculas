@@ -4,45 +4,5 @@
       <h1 mat-dialog-title>Nueva Película</h1>
     </div>
   </div>
-  <div class="row">
-    <div class="col-12">
-      <div mat-dialog-content class="pr-0 mr-0">
-        <mat-form-field class="w-100 pr-0">
-          <mat-label>Nombre de la Película</mat-label>
-          <input matInput>
-        </mat-form-field>
-      </div>
-    </div>
-    <div class="col-12">
-      <div mat-dialog-content class="pr-0 mr-0">
-        <mat-form-field class="w-100 pr-0">
-          <mat-label>Fecha de Publicación</mat-label>
-          <input matInput>
-        </mat-form-field>
-      </div>
-    </div>
-    <div class="col-12">
-      <div mat-dialog-content class="pr-0 mr-0">
-        <mat-form-field class="w-100 pr-0">
-          <mat-label>Seleccione el estado</mat-label>
-          <mat-select>
-            <mat-option *ngFor="let state of states" [value]="state.value">
-              {{state.viewValue}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12 py-3">
-      <div mat-dialog-actions class="pr-0 mr-0 d-flex justify-content-center">
-        <button mat-button class="rounded px-1 px-sm-3 py-1 mr-5" (click)="onNoClick()">Cancelar</button>
-        <button mat-raised-button
-                color="primary"
-                class="rounded px-1 px-sm-3 py-1"
-                [mat-dialog-close]="data.animal">Guardar</button>
-      </div>
-    </div>
-  </div>
+  <app-form-movie class="row"></app-form-movie>
 </div>

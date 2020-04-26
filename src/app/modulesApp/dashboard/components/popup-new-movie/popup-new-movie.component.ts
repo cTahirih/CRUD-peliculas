@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
@@ -8,20 +8,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 })
 
 export class PopupNewMovieComponent implements OnInit {
-  states: any[] = [
-    {value: 'active-0', viewValue: 'Activo'},
-    {value: 'inactive-1', viewValue: 'Inactivo'}
-  ];
-
-  constructor(
-    public dialogRef: MatDialogRef<PopupNewMovieComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {}
+  constructor() {}
 
   ngOnInit() {
   }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
 }

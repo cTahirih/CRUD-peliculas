@@ -16,17 +16,15 @@ import { DashboardComponent } from './dashboard.component';
 import { HomeComponent } from './components/home/home.component';
 import { MoviesComponent } from './components/moviesPage/movies.component';
 import { PopupNewMovieComponent } from './components/popup-new-movie/popup-new-movie.component';
+import {FormMovieComponent} from './components/form-movie/form-movie.component';
 
 import { DashboardRouting } from './dashboard.routing';
-
-
-
-
 
 @NgModule({
   declarations: [
     HomeComponent,
     DashboardComponent,
+    FormMovieComponent,
     MoviesComponent,
     PopupNewMovieComponent
   ],
