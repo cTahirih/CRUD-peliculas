@@ -1,5 +1,6 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-form-movie',
@@ -11,10 +12,15 @@ export class FormMovieComponent implements OnInit {
     {value: 'active-0', viewValue: 'Activo'},
     {value: 'inactive-1', viewValue: 'Inactivo'}
   ];
+  formMovie: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<FormMovieComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {}
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private formBuilder: FormBuilder
+    ) {
+    this.generateForm();
+  }
 
   ngOnInit() {
   }
@@ -23,4 +29,12 @@ export class FormMovieComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  generateForm() {
+    this.formMovie = this.formBuilder.group({
+      id: [''],
+      nameMovie: ['', [Validators.required]],
+      date: ['', [Validators.required]],
+      state: ['', [Validators.required]],
+    });
+  }
 }

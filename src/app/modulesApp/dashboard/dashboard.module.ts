@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // Angular material
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {
@@ -35,13 +35,14 @@ import { PopupEditMovieComponent } from './components/popup-edit-movie/popup-edi
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     DashboardRouting,
     MatToolbarModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatDialogModule,
-    FormsModule,
     MatSidenavModule,
     MatPaginatorModule,
     MatTableModule,

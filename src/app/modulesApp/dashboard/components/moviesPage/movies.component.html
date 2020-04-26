@@ -20,7 +20,7 @@
     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Jason Bourne">
   </mat-form-field>
 
-  <div class="mat-elevation-z8">
+  <div class="mat-elevation-z8" [formGroup]="formMovies">
     <table mat-table [dataSource]="dataSource" matSort>
 
       <!-- ID Column -->

@@ -1,22 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material';
 
-import { randomDate } from 'src/app/core/functions/date.funtions';
-import {PopupNewMovieComponent} from '../popup-new-movie/popup-new-movie.component';
-import {PopupEditMovieComponent} from '../popup-edit-movie/popup-edit-movie.component';
+import { date2String } from 'src/app/core/functions/date.funtions';
+import { createMovies } from '../../../../core/functions/movie.functions';
+import { DataMovie } from '../../interfaces/movie.interface';
 
-export interface MovieData {
-  id: string;
-  nameMovie: string;
-  date: string;
-  state: string;
-  edit: string;
-}
+import { PopupNewMovieComponent } from '../popup-new-movie/popup-new-movie.component';
+import { PopupEditMovieComponent } from '../popup-edit-movie/popup-edit-movie.component';
 
-/** Constants used to fill up our data base. */
 const STATE: string[] = [
   'Activo', 'Inactivo'
 ];
@@ -33,20 +28,24 @@ const MOVIES: string[] = [
 export class MoviesComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'nameMovie', 'date', 'state', 'edit'];
-  dataSource: MatTableDataSource<MovieData>;
+  dataSource: MatTableDataSource<DataMovie>;
   movies: any[];
+  formMovies: FormGroup;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(
+    private formBuilder: FormBuilder,
     public dialog: MatDialog
   ) {
     // Create 100 users
-    this.movies = Array.from({length: 100}, (_, k) => createMovies(k + 1));
+    this.movies = Array.from({length: 5}, (_, k) => createMovies(k + 1, MOVIES, STATE));
 
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(this.movies);
+
+    this.generateFormMovie();
   }
 
   ngOnInit() {
@@ -66,22 +65,36 @@ export class MoviesComponent implements OnInit {
   openNewMoviePopup(): void {
     const dialogRef = this.dialog.open(PopupNewMovieComponent, {
       width: '60%',
-      data: {name: 'nombre', animal: 'pelicula'}
+      data: {
+        id: this.movies.length,
+        type: 'open'
+      }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+    dialogRef.afterClosed().subscribe((result: DataMovie) => {
+      const newMovie = {
+        id: this.movies.length + 1,
+        nameMovie: result.nameMovie,
+        date: date2String(result.date),
+        state: this.isActive(result.state)
+      };
+
+      this.movies.push(newMovie);
+      this.dataSource = new MatTableDataSource(this.movies);
     });
   }
 
   openEditMoviePopup(id: number): void {
     const dialogRef = this.dialog.open(PopupEditMovieComponent, {
       width: '60%',
-      data: {name: 'nombre', animal: 'pelicula'}
+      data: {
+        id
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      console.log(result);
     });
   }
 
@@ -89,19 +102,19 @@ export class MoviesComponent implements OnInit {
     console.log(this.movies.filter((elm) => elm.id === id));
   }
 
+  isActive(value) {
+    return value === 'active-0' ? 'Activo' : 'Inactivo';
+  }
+
+  generateFormMovie() {
+    this.formMovies = this.formBuilder.group({
+      id: [''],
+      nameMovie: ['', [Validators.required]],
+      date: ['', [Validators.required]],
+      state: ['', [Validators.required]],
+    });
+  }
 }
 
-function createMovies(id: number): MovieData {
-  const nameMovie = MOVIES[Math.round(Math.random() * (MOVIES.length - 1))] + ' ' +
-    MOVIES[Math.round(Math.random() * (MOVIES.length - 1))].charAt(0) + '.';
-
-  return {
-    id: id.toString(),
-    nameMovie,
-    date: randomDate(new Date(2012, 0, 1), new Date()),
-    state: STATE[Math.round(Math.random() * (STATE.length - 1))],
-    edit: 'editar'
-  };
-}
 
 
