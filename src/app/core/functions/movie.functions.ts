@@ -1,7 +1,7 @@
-import { DataMovie } from '../../modulesApp/dashboard/interfaces/movie.interface';
+import { MovieDataInterface } from '../../modulesApp/dashboard/interfaces/movie.interface';
 import { randomDate } from './date.funtions';
 
-export function createMovies(id: number, MOVIES: string[], STATE: string[]): DataMovie {
+export function createMovies(id: number, MOVIES: string[], STATE: string[]): MovieDataInterface {
   const nameMovie = MOVIES[Math.round(Math.random() * (MOVIES.length - 1))] + ' ' +
     MOVIES[Math.round(Math.random() * (MOVIES.length - 1))].charAt(0) + '.';
 
