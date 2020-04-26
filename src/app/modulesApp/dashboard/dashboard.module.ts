@@ -8,15 +8,17 @@ import {
   MatDialogModule,
   MatFormFieldModule,
   MatInputModule,
-  MatPaginatorModule,
+  MatPaginatorModule, MatSelectModule,
   MatSidenavModule, MatSortModule, MatTableModule
 } from '@angular/material';
 
 import { DashboardComponent } from './dashboard.component';
 import { HomeComponent } from './components/home/home.component';
 import { MoviesComponent } from './components/moviesPage/movies.component';
+import { PopupNewMovieComponent } from './components/popup-new-movie/popup-new-movie.component';
 
 import { DashboardRouting } from './dashboard.routing';
+
 
 
 
@@ -25,7 +27,8 @@ import { DashboardRouting } from './dashboard.routing';
   declarations: [
     HomeComponent,
     DashboardComponent,
-    MoviesComponent
+    MoviesComponent,
+    PopupNewMovieComponent
   ],
   exports: [
 
@@ -42,7 +45,8 @@ import { DashboardRouting } from './dashboard.routing';
     MatSidenavModule,
     MatPaginatorModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    MatSelectModule
   ]
 })
 export class DashboardModule { }

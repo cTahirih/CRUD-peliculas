@@ -2,8 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material';
 
 import { randomDate } from 'src/app/core/functions/date.funtions';
+import {PopupNewMovieComponent} from '../popup-new-movie/popup-new-movie.component';
 
 export interface MovieData {
   id: string;
@@ -35,7 +37,9 @@ export class MoviesComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor() {
+  constructor(
+    public dialog: MatDialog
+  ) {
     // Create 100 users
     const movies = Array.from({length: 100}, (_, k) => createMovies(k + 1));
 
@@ -56,6 +60,18 @@ export class MoviesComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(PopupNewMovieComponent, {
+      width: '60%',
+      data: {name: 'nombre', animal: 'pelicula'}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
 }
 
 function createMovies(id: number): MovieData {

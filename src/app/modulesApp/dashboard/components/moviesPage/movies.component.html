@@ -5,7 +5,12 @@
       <hr>
     </div>
     <div class="col-6 col-sm-4 col-md-2 mt-3 text-right">
-      <button mat-raised-button color="primary" class="rounded px-1 px-sm-3 py-0 py-sm-2">Añadir Película</button>
+      <button
+        mat-raised-button
+        color="primary"
+        class="rounded px-1 px-sm-3 py-0 py-sm-2"
+        (click)="openDialog()"
+      >Añadir Película</button>
     </div>
   </div>
 
