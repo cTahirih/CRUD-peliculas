@@ -10,7 +10,9 @@
   <div mat-dialog-content class="pr-0 mr-0">
     <mat-form-field class="w-100 pr-0">
       <mat-label>Fecha de Publicación</mat-label>
-      <input matInput>
+      <input matInput [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
   </div>
 </div>
