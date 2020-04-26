@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import {DataMovie} from '../../interfaces/movie.interface';
+import {DataMovie, MovieDataInterface} from '../../interfaces/movie.interface';
+import { MoviesService } from '../../services/movies.service';
 
 @Component({
   selector: 'app-form-movie',
@@ -14,16 +15,20 @@ export class FormMovieComponent implements OnInit {
     {value: 'inactive-1', viewValue: 'Inactivo'}
   ];
   formMovie: FormGroup;
+  newMovie: DataMovie = new DataMovie();
 
   constructor(
     public dialogRef: MatDialogRef<FormMovieComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private moviesService: MoviesService
     ) {
     this.generateForm();
     if (this.data.type === 'edit') {
       this.editMovie(this.data.data);
     }
+
+    this.formOnChange();
   }
 
   ngOnInit() {
@@ -35,19 +40,71 @@ export class FormMovieComponent implements OnInit {
 
   generateForm() {
     this.formMovie = this.formBuilder.group({
-      id: [''],
+      id: [{value: this.newMovie.id, disabled: true}],
       nameMovie: ['', [Validators.required]],
       date: ['', [Validators.required]],
       state: ['', [Validators.required]],
     });
   }
 
-  editMovie(data: DataMovie) {
+  editMovie(data: MovieDataInterface) {
     this.formMovie.setValue({
       id: data.id,
       nameMovie: data.nameMovie,
       date: data.date,
       state: data.state === 'Activo' ? 'active-0' : 'inactive-1',
     })
+  }
+
+  formOnChange() {
+    this.formMovie.valueChanges.subscribe(
+      (value: DataMovie) => {
+        this.newMovie = {
+          id: value.id,
+          nameMovie: value.nameMovie,
+          state: value.state,
+          date: value.date
+        }
+      }
+    )
+  }
+
+  onSubmit() {
+    // this.data.type === 'open' ? this.saveNewMovie() : this.editMovieFromData();
+    if (this.data.type === 'edit') {
+      this.newMovie.id = this.data.data.id;
+      this.moviesService.updateMovie(this.newMovie)
+        .subscribe(
+          (response: any) => {
+            if (response.nameMovie) {
+              this.dialogRef.close(this.newMovie);
+            }
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    } else {
+      this.moviesService.createMovie(this.newMovie)
+        .subscribe(
+          (response) => {
+            if (response.id) {
+              this.newMovie = response;
+              this.dialogRef.close(this.newMovie);
+            }
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    }
+  }
+
+  saveNewMovie() {
+
+  }
+
+  editMovieFromData() {
+
   }
 }

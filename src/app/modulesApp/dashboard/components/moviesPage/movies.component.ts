@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material';
 
 import { date2String } from 'src/app/core/functions/date.funtions';
 import { createMovies } from '../../../../core/functions/movie.functions';
-import { DataMovie } from '../../interfaces/movie.interface';
+import {DataMovie, MovieDataInterface} from '../../interfaces/movie.interface';
 
 import { PopupNewMovieComponent } from '../popup-new-movie/popup-new-movie.component';
 import { PopupEditMovieComponent } from '../popup-edit-movie/popup-edit-movie.component';
@@ -28,7 +28,7 @@ const MOVIES: string[] = [
 export class MoviesComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'nameMovie', 'date', 'state', 'edit'];
-  dataSource: MatTableDataSource<DataMovie>;
+  dataSource: MatTableDataSource<MovieDataInterface>;
   movies: any[];
   formMovies: FormGroup;
 
@@ -37,7 +37,7 @@ export class MoviesComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    public dialog: MatDialog
+    public dialog: MatDialog,
   ) {
     // Create n movies
     this.movies = Array.from({length: 5}, (_, k) => createMovies(k + 1, MOVIES, STATE));
@@ -72,9 +72,9 @@ export class MoviesComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result: DataMovie) => {
-      if (result) {
+      if (result.id) {
         const newMovie = {
-          id: this.movies.length + 1,
+          id: result.id,
           nameMovie: result.nameMovie,
           date: date2String(result.date),
           state: this.isActive(result.state)
@@ -96,19 +96,27 @@ export class MoviesComponent implements OnInit {
       }
     });
 
-    this.afterClosedPopup(dialogRef, id - 1);
-  }
+    dialogRef.afterClosed().subscribe((result: DataMovie) => {
+      if (result.nameMovie) {
+        console.log('editapop');
+        console.log(result)
+        let index: number;
+        this.movies.map((elm, i) => {
+          if (elm.id === result.id) {
+            index = i;
+          }
+        });
 
-  afterClosedPopup(dialogRef, id) {
-    dialogRef.afterClosed().subscribe(result => {
-      this.movies[id] = {
-        id,
-        nameMovie: result.nameMovie,
-        date: date2String(result.date),
-        state: this.isActive(result.state)
-      };
+        console.log(index);
+        this.movies[index] = {
+          id: result.id,
+          nameMovie: result.nameMovie,
+          date: date2String(result.date),
+          state: this.isActive(result.state)
+        };
 
-      this.dataSource = new MatTableDataSource(this.movies);
+        this.dataSource = new MatTableDataSource(this.movies);
+      }
     });
   }
 
