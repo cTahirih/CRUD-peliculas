@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FormMovieComponent } from './form-movie.component';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 
 describe('HomeComponent', () => {
   let component: FormMovieComponent;
@@ -8,7 +9,11 @@ describe('HomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FormMovieComponent ]
+      declarations: [ FormMovieComponent ],
+      providers: [
+        { provide: MatDialogRef, useValue: {} },
+        { provide: MAT_DIALOG_DATA, useValue: [] },
+      ]
     })
     .compileComponents();
   }));
