@@ -6,7 +6,7 @@ export function createMovies(id: number, MOVIES: string[], STATE: string[]): Mov
     MOVIES[Math.round(Math.random() * (MOVIES.length - 1))].charAt(0) + '.';
 
   return {
-    id,
+    id: id + '',
     nameMovie,
     date: randomDate(new Date(2012, 0, 1), new Date()),
     state: STATE[Math.round(Math.random() * (STATE.length - 1))]
