@@ -16,11 +16,13 @@
 
   <!--TABLA DE PELICULAS-->
   <mat-form-field>
-    <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Jason Bourne">
+    <mat-label>Realizar una búsqueda</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ejm. Jason Bourne">
   </mat-form-field>
 
-  <div class="mat-elevation-z8">
+  <app-card-alerts *ngIf="movies.length === 0"></app-card-alerts>
+
+  <div class="mat-elevation-z8" *ngIf="movies.length > 0">
     <table mat-table [dataSource]="dataSource" matSort>
 
       <!-- ID Column -->

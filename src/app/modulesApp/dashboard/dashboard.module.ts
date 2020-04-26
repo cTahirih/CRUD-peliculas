@@ -21,10 +21,12 @@ import { HomeComponent } from './components/home/home.component';
 import { MoviesComponent } from './components/moviesPage/movies.component';
 import { PopupNewMovieComponent } from './components/popup-new-movie/popup-new-movie.component';
 import { PopupEditMovieComponent } from './components/popup-edit-movie/popup-edit-movie.component';
+import { CardAlertsComponent } from './components/card-alerts/card-alerts.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
+    CardAlertsComponent,
     DashboardComponent,
     FormMovieComponent,
     MoviesComponent,
