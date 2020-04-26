@@ -1,8 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { LoginFormComponent } from './login-form.component';
-import {FormBuilder} from '@angular/forms';
-import {RouterTestingModule} from '@angular/router/testing';
 
 describe('LoginFormComponent', () => {
   let component: LoginFormComponent;
@@ -12,7 +13,8 @@ describe('LoginFormComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ LoginFormComponent ],
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        HttpClientTestingModule,
       ],
       providers: [
         FormBuilder
