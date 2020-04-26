@@ -25,3 +25,14 @@
     font-size: 34px;
   }
 }
+
+.color-blue {
+  color: $blue;
+  &:hover {
+    color: $blue2;
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
