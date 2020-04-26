@@ -1,5 +1,5 @@
 export interface MovieDataInterface {
-  id?: number;
+  id?: string;
   nameMovie: string;
   date: any;
   state: string;
@@ -12,7 +12,7 @@ export interface ConfigPopup {
 
 export class DataMovie {
 
-  id?: number;
+  id?: string;
   nameMovie: string;
   date: any;
   state: string;

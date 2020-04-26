@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 import { DataMovie, MovieDataInterface} from '../interfaces/movie.interface';
+import {date2String} from '../../../core/functions/date.funtions';
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +35,31 @@ export class MoviesService {
 
     delete movieTemp.id;
     return this.http.put(`${this.URL_BASE}/movies/${movie.id}.json`, movieTemp);
+  }
+
+  getMovies() {
+    return this.http.get(`${this.URL_BASE}/movies.json`)
+      .pipe(
+        map(this.createArrayMovies)
+      );
+  }
+
+  private createArrayMovies( moviesObj: object) {
+    const MOVIES: MovieDataInterface[] = [];
+
+    if (moviesObj === null) {
+      return [];
+    }
+
+    Object.keys(moviesObj).forEach( key => {
+      const movie: MovieDataInterface = moviesObj[key];
+      movie.id = key;
+      movie.date = date2String(movie.date);
+      movie.state = movie.state === 'active-0' ? 'Activo' : 'Inactivo';
+
+      MOVIES.push(movie);
+    });
+
+    return MOVIES;
   }
 }

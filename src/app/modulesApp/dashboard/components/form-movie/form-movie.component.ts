@@ -70,7 +70,6 @@ export class FormMovieComponent implements OnInit {
   }
 
   onSubmit() {
-    // this.data.type === 'open' ? this.saveNewMovie() : this.editMovieFromData();
     if (this.data.type === 'edit') {
       this.newMovie.id = this.data.data.id;
       this.moviesService.updateMovie(this.newMovie)
@@ -98,13 +97,5 @@ export class FormMovieComponent implements OnInit {
           }
         );
     }
-  }
-
-  saveNewMovie() {
-
-  }
-
-  editMovieFromData() {
-
   }
 }
