@@ -45,7 +45,8 @@ export class MoviesService {
   }
 
   deleteMovie(id: string) {
-    return this.http.delete(`${this.URL_BASE}/movies/${id}.json`);
+    console.log(`${this.URL_BASE}/movies/${id}.json`);
+    return this.http.delete(`${ this.URL_BASE }/movies/${ id }.json`);
   }
 
   private createArrayMovies( moviesObj: object) {

@@ -108,8 +108,10 @@ export class MoviesComponent implements OnInit {
 
   deleteMovie(id: string, index: number) {
     this.movies.splice(index, 1);
+    this.moviesService.deleteMovie(id).subscribe(
+      resp => console.log(resp)
+    );
     this.dataSource = new MatTableDataSource(this.movies);
-    this.moviesService.deleteMovie(id);
   }
 
   isActive(value) {
