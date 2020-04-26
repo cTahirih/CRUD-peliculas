@@ -2,17 +2,16 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
-import { RegisterUserComponent } from './components/register-user/register-user.component';
 import { HomeComponent } from './components/home/home.component';
-import {LoginComponent} from '../login/login.component';
-import {LoginPageComponent} from '../login/components/login-page/login-page.component';
-import {DashboardComponent} from './dashboard.component';
+import { DashboardComponent } from './dashboard.component';
+import { MoviesComponent } from './components/moviesPage/movies.component';
 
 const routes: Routes = [
   {
     path: '', component: DashboardComponent,
     children: [
       {path: 'home', component: HomeComponent},
+      {path: 'movies', component: MoviesComponent},
     ]
   }
 ];

@@ -1,1 +1,27 @@
 @import './assets/styles/styles';
+
+.font-12 {
+  font-size: 12px;
+}
+
+.font-14 {
+  font-size: 14px;
+}
+
+.font-16 {
+  font-size: 16px;
+}
+
+.font-18 {
+  font-size: 18px;
+}
+
+.font-title {
+  font-size: 24px;
+  @include media-breakpoint-up(sm) {
+    font-size: 30px;
+  }
+  @include media-breakpoint-up(md) {
+    font-size: 34px;
+  }
+}
