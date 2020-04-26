@@ -7,9 +7,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import {
   MatButtonModule, MatDatepickerModule,
   MatDialogModule,
-  MatFormFieldModule,
+  MatFormFieldModule, MatIconModule,
   MatInputModule, MatNativeDateModule,
-  MatPaginatorModule, MatSelectModule,
+  MatPaginatorModule, MatProgressSpinnerModule, MatSelectModule,
   MatSidenavModule, MatSortModule, MatTableModule,
 } from '@angular/material';
 
@@ -52,7 +52,9 @@ import { CardAlertsComponent } from './components/card-alerts/card-alerts.compon
     MatSortModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatIconModule,
+    MatProgressSpinnerModule
   ]
 })
 export class DashboardModule { }

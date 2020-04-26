@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material';
+import Swal from 'sweetalert2';
 
 import { date2String } from 'src/app/core/functions/date.funtions';
 import { DataMovie, MovieDataInterface } from '../../interfaces/movie.interface';
@@ -53,7 +54,7 @@ export class MoviesComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result: DataMovie) => {
-      if (result.id) {
+      if (result) {
         const newMovie = {
           id: result.id,
           nameMovie: result.nameMovie,
@@ -78,7 +79,7 @@ export class MoviesComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result: DataMovie) => {
-      if (result.nameMovie) {
+      if (result) {
         this.movies[i] = {
           id: result.id,
           nameMovie: result.nameMovie,
@@ -106,12 +107,24 @@ export class MoviesComponent implements OnInit {
       );
   }
 
-  deleteMovie(id: string, index: number) {
-    this.movies.splice(index, 1);
-    this.moviesService.deleteMovie(id).subscribe(
-      resp => console.log(resp)
-    );
-    this.dataSource = new MatTableDataSource(this.movies);
+  deleteMovie(movie: MovieDataInterface, index: number) {
+    Swal.fire({
+      title: '¿Está seguro?',
+      text: `Está seguro que desea borrar la película:  ${ movie.nameMovie }`,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No'
+    }).then( resp => {
+      if ( resp.value ) {
+        this.movies.splice(index, 1);
+        this.moviesService.deleteMovie(movie.id).subscribe();
+        this.dataSource = new MatTableDataSource(this.movies);
+      }
+
+    });
   }
 
   isActive(value) {

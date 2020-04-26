@@ -16,6 +16,7 @@ export class FormMovieComponent implements OnInit {
   ];
   formMovie: FormGroup;
   newMovie: DataMovie = new DataMovie();
+  loading = false;
 
   constructor(
     public dialogRef: MatDialogRef<FormMovieComponent>,
@@ -70,6 +71,7 @@ export class FormMovieComponent implements OnInit {
   }
 
   onSubmit() {
+    this.loading = true;
     if (this.data.type === 'edit') {
       this.newMovie.id = this.data.data.id;
       this.moviesService.updateMovie(this.newMovie)
@@ -77,6 +79,7 @@ export class FormMovieComponent implements OnInit {
           (response: any) => {
             if (response.nameMovie) {
               this.dialogRef.close(this.newMovie);
+              this.loading = false;
             }
           },
           (error) => {
@@ -90,6 +93,7 @@ export class FormMovieComponent implements OnInit {
             if (response.id) {
               this.newMovie = response;
               this.dialogRef.close(this.newMovie);
+              this.loading = false;
             }
           },
           (error) => {

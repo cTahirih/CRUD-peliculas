@@ -35,9 +35,14 @@
       <button mat-button class="rounded px-1 px-sm-3 py-1 mr-5" (click)="onNoClick()">Cancelar</button>
       <button mat-raised-button
               type="submit"
-              color="primary"
+              color="accent"
               class="rounded px-1 px-sm-3 py-1"
-              [disabled]="formMovie.invalid">Guardar</button>
+              [disabled]="formMovie.invalid">Guardar
+        <mat-icon *ngIf="loading" color="warn">
+          <mat-spinner diameter="20">
+        </mat-spinner>
+        </mat-icon>
+      </button>
     </div>
   </div>
 
