@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // material angular
-import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import {MatCheckboxModule, MatFormFieldModule, MatInputModule} from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 
 import { LoginFormComponent } from './components/login-form/login-form.component';
@@ -22,14 +22,15 @@ import { LoginRouting } from './login.routing';
   exports: [
     LoginAsideComponent
   ],
-  imports: [
-    CommonModule,
-    LoginRouting,
-    MatInputModule,
-    MatFormFieldModule,
-    MatButtonModule,
-    ReactiveFormsModule,
-    FormsModule
-  ]
+    imports: [
+        CommonModule,
+        LoginRouting,
+        MatInputModule,
+        MatFormFieldModule,
+        MatButtonModule,
+        ReactiveFormsModule,
+        FormsModule,
+        MatCheckboxModule
+    ]
 })
 export class LoginModule { }

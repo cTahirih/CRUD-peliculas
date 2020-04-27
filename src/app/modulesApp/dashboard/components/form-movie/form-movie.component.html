@@ -1,4 +1,4 @@
-<form class="w-100" [formGroup]="formMovie">
+<form class="w-100" [formGroup]="formMovie" (ngSubmit)="onSubmit()">
   <div class="col-12">
     <div mat-dialog-content class="pr-0 mr-0">
       <mat-form-field class="w-100 pr-0">
@@ -34,10 +34,15 @@
     <div mat-dialog-actions class="pr-0 mr-0 d-flex justify-content-center">
       <button mat-button class="rounded px-1 px-sm-3 py-1 mr-5" (click)="onNoClick()">Cancelar</button>
       <button mat-raised-button
-              color="primary"
+              type="submit"
+              color="accent"
               class="rounded px-1 px-sm-3 py-1"
-              [disabled]="formMovie.invalid"
-              [mat-dialog-close]="this.formMovie.value">Guardar</button>
+              [disabled]="formMovie.invalid">Guardar
+        <mat-icon *ngIf="loading" color="warn">
+          <mat-spinner diameter="20">
+        </mat-spinner>
+        </mat-icon>
+      </button>
     </div>
   </div>
 

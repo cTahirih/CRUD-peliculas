@@ -1,5 +1,5 @@
-export interface DataMovie {
-  id: number;
+export interface MovieDataInterface {
+  id?: string;
   nameMovie: string;
   date: any;
   state: string;
@@ -7,5 +7,17 @@ export interface DataMovie {
 
 export interface ConfigPopup {
   width: number;
-  data: DataMovie;
+  data: MovieDataInterface;
+}
+
+export class DataMovie {
+
+  id?: string;
+  nameMovie: string;
+  date: any;
+  state: string;
+
+  constructor() {
+  }
+
 }

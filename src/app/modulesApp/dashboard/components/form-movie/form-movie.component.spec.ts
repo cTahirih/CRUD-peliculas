@@ -1,7 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FormMovieComponent } from './form-movie.component';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { FormBuilder } from '@angular/forms';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('HomeComponent', () => {
   let component: FormMovieComponent;
@@ -13,6 +15,10 @@ describe('HomeComponent', () => {
       providers: [
         { provide: MatDialogRef, useValue: {} },
         { provide: MAT_DIALOG_DATA, useValue: [] },
+        FormBuilder
+      ],
+      imports: [
+        HttpClientTestingModule
       ]
     })
     .compileComponents();
