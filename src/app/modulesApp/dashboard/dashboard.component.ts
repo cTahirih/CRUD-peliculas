@@ -9,12 +9,35 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
   @HostBinding('class') class = 'w-100';
+  LINKS = [
+    {
+      url: '/dashboard/home',
+      titleLink: 'Dashboard'
+    },
+    {
+      url: '/dashboard/movies',
+      titleLink: 'Películas'
+    },
+    {
+      url: '/dashboard/home',
+      titleLink: 'Turnos'
+    },
+    {
+      url: '/dashboard/home',
+      titleLink: 'Administradores'
+    },
+    {
+      url: '/dashboard/profile',
+      titleLink: 'Perfil'
+    },
+  ];
   constructor(
     private loginService: LoginService,
     private router: Router
   ) { }
 
   ngOnInit() {
+
   }
 
   logOut() {

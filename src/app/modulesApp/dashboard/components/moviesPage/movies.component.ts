@@ -22,6 +22,7 @@ export class MoviesComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nameMovie', 'date', 'state', 'edit'];
   dataSource: MatTableDataSource<MovieDataInterface>;
   movies: any[];
+  showNotification = false;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -93,18 +94,30 @@ export class MoviesComponent implements OnInit {
   }
 
   getListMovies() {
+    this.showNotification = true;
     this.moviesService.getMovies()
       .subscribe(
         (response: MovieDataInterface[]) => {
           if(response) {
-            this.movies = response;
-            // Assign the data to the data source for the table to render
-            this.dataSource = new MatTableDataSource(this.movies);
-            this.dataSource.paginator = this.paginator;
-            this.dataSource.sort = this.sort;
+            if (response.length === 0) {
+              this.showNotification = true;
+              this.setDataMovies(response);
+            } else {
+              this.showNotification = false;
+              this.setDataMovies(response);
+            }
           }
         }
       );
+  }
+
+  setDataMovies(data) {
+    this.showNotification = false;
+    this.movies = data;
+    // Assign the data to the data source for the table to render
+    this.dataSource = new MatTableDataSource(this.movies);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   deleteMovie(movie: MovieDataInterface, index: number) {

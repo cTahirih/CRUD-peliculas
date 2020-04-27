@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // Angular material
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {
-  MatButtonModule, MatDatepickerModule,
+  MatButtonModule, MatCardModule, MatDatepickerModule,
   MatDialogModule,
   MatFormFieldModule, MatIconModule,
   MatInputModule, MatNativeDateModule,
@@ -22,6 +22,7 @@ import { MoviesComponent } from './components/moviesPage/movies.component';
 import { PopupNewMovieComponent } from './components/popup-new-movie/popup-new-movie.component';
 import { PopupEditMovieComponent } from './components/popup-edit-movie/popup-edit-movie.component';
 import { CardAlertsComponent } from './components/card-alerts/card-alerts.component';
+import { ProfilePageComponent } from './components/profilePage/profile-page.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { CardAlertsComponent } from './components/card-alerts/card-alerts.compon
     FormMovieComponent,
     MoviesComponent,
     PopupEditMovieComponent,
-    PopupNewMovieComponent
+    PopupNewMovieComponent,
+    ProfilePageComponent
   ],
   exports: [
 
@@ -54,7 +56,8 @@ import { CardAlertsComponent } from './components/card-alerts/card-alerts.compon
     MatDatepickerModule,
     MatNativeDateModule,
     MatIconModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatCardModule
   ]
 })
 export class DashboardModule { }
