@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 import { DataMovie, MovieDataInterface} from '../interfaces/movie.interface';
-import {date2String} from '../../../core/functions/date.funtions';
 
 @Injectable({
   providedIn: 'root'
@@ -58,7 +57,6 @@ export class MoviesService {
     Object.keys(moviesObj).forEach( key => {
       const movie: MovieDataInterface = moviesObj[key];
       movie.id = key;
-      movie.date = date2String(movie.date);
       movie.state = movie.state === 'active-0' ? 'Activo' : 'Inactivo';
 
       MOVIES.push(movie);

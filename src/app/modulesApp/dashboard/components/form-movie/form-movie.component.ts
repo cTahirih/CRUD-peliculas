@@ -1,8 +1,10 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, ThemePalette } from '@angular/material';
 import {DataMovie, MovieDataInterface} from '../../interfaces/movie.interface';
 import { MoviesService } from '../../services/movies.service';
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-form-movie',
@@ -10,6 +12,8 @@ import { MoviesService } from '../../services/movies.service';
   styleUrls: ['./form-movie.component.scss']
 })
 export class FormMovieComponent implements OnInit {
+  @ViewChild('picker') picker: any;
+
   states: any[] = [
     {value: 'active-0', viewValue: 'Activo'},
     {value: 'inactive-1', viewValue: 'Inactivo'}
@@ -17,6 +21,14 @@ export class FormMovieComponent implements OnInit {
   formMovie: FormGroup;
   newMovie: DataMovie = new DataMovie();
   loading = false;
+
+  public date: moment.Moment;
+  public showSpinners = true;
+  public showSeconds = false;
+  public stepHour = 1;
+  public stepMinute = 1;
+  public stepSecond = 1;
+  public color: ThemePalette = 'primary';
 
   constructor(
     public dialogRef: MatDialogRef<FormMovieComponent>,
@@ -43,7 +55,7 @@ export class FormMovieComponent implements OnInit {
     this.formMovie = this.formBuilder.group({
       id: [{value: this.newMovie.id, disabled: true}],
       nameMovie: ['', [Validators.required]],
-      date: ['', [Validators.required]],
+      date: [new Date(), [Validators.required]],
       state: ['', [Validators.required]],
     });
   }
@@ -54,7 +66,7 @@ export class FormMovieComponent implements OnInit {
       nameMovie: data.nameMovie,
       date: data.date,
       state: data.state === 'Activo' ? 'active-0' : 'inactive-1',
-    })
+    });
   }
 
   formOnChange() {
@@ -65,9 +77,9 @@ export class FormMovieComponent implements OnInit {
           nameMovie: value.nameMovie,
           state: value.state,
           date: value.date
-        }
+        };
       }
-    )
+    );
   }
 
   onSubmit() {

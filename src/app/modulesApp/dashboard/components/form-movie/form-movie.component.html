@@ -10,10 +10,19 @@
   <div class="col-12">
     <div mat-dialog-content class="pr-0 mr-0">
       <mat-form-field class="w-100 pr-0">
-        <mat-label>Fecha de Publicación</mat-label>
-        <input matInput formControlName="date" [matDatepicker]="picker">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+        <input matInput [ngxMatDatetimePicker]="picker"
+               formControlName="date"
+               placeholder="Fecha de Publicación">
+        <mat-datepicker-toggle matSuffix [for]="picker">
+        </mat-datepicker-toggle>
+        <ngx-mat-datetime-picker #picker
+                                 [showSpinners]="showSpinners"
+                                 [showSeconds]="showSeconds"
+                                 [stepHour]="stepHour"
+                                 [stepMinute]="stepMinute"
+                                 [stepSecond]="stepSecond"
+                                 [color]="color">
+        </ngx-mat-datetime-picker>
       </mat-form-field>
     </div>
   </div>

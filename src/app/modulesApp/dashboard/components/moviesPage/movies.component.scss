@@ -1,12 +1,82 @@
+@import "~bootstrap/scss/bootstrap-grid.scss";
+
 table {
   width: 100%;
 }
 
 .mat-form-field {
-  font-size: 14px;
+  font-size: 16px;
   width: 100%;
 }
 
 td, th {
   width: 20%;
+  font-size: 12px;
+  @include media-breakpoint-up(sm) {
+    font-size: 14px;
+  }
+}
+
+td.mat-cell:first-of-type,
+th.mat-cell:first-of-type,
+td.mat-cell:last-of-type,
+th.mat-cell:last-of-type {
+  padding-left: 10px;
+  padding-right: 10px;
+  @include media-breakpoint-up(sm) {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  @include media-breakpoint-up(md) {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+.fila-id {
+  width: 10%;
+}
+
+.row-state-font {
+  font-size: 10px;
+  @include media-breakpoint-up(sm) {
+    font-size: 14px;
+  }
+}
+
+.scrollbar {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y:hidden;
+  background-clip: padding-box;
+
+  @include media-breakpoint-up(md) {
+    float: left;
+  }
+  @include media-breakpoint-up(lg) {
+    float: left;
+  }
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #cacaca;
+    background-clip: padding-box;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb:active {
+    background-color: #999999;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #e9e9e9;
+    border-radius: 4px;
+  }
 }
