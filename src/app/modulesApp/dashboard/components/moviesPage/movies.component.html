@@ -8,7 +8,7 @@
       <button
         mat-raised-button
         color="primary"
-        class="rounded px-1 px-sm-3 py-0 py-sm-2"
+        class="rounded px-1 px-sm-2 px-md-3 py-0 py-sm-2"
         (click)="openNewMoviePopup()"
       >Añadir Película</button>
     </div>
@@ -22,17 +22,17 @@
 
   <app-card-alerts
     [icon]="'error_outline'"
-    [message]="'No hay registros'"
+    [message]="alertMessage"
     [styleAlert]="'alert-warning'"
     *ngIf="showNotification" async></app-card-alerts>
 
-  <div class="mat-elevation-z8" *ngIf="!showNotification">
+  <div class="mat-elevation-z8 scrollbar" *ngIf="!showNotification">
     <table mat-table [dataSource]="dataSource" matSort>
 
       <!-- ID Column -->
       <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-        <td mat-cell *matCellDef="let row"> {{ row.id }} </td>
+        <th class="fila-id" mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+        <td class="fila-id" mat-cell *matCellDef="let row"> {{ row.id | slicePipe: 0 : 7}} </td>
       </ng-container>
 
       <!-- Name Column -->
@@ -44,24 +44,24 @@
       <!-- Date Column -->
       <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Publicación </th>
-        <td mat-cell *matCellDef="let row"> {{row.date}} </td>
+        <td mat-cell *matCellDef="let row"> {{ row.date | date: 'short' }} </td>
       </ng-container>
 
       <!-- State Column -->
       <ng-container matColumnDef="state">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
-        <td mat-cell *matCellDef="let row" [style.color]="row.state === 'Activo' ? 'green' : 'red' "> {{row.state}} </td>
+        <td class="row-state-font" mat-cell *matCellDef="let row" [style.color]="row.state === 'Activo' ? 'green' : 'red' "> {{row.state}} </td>
       </ng-container>
 
       <!-- Edit/Delete Column -->
       <ng-container matColumnDef="edit">
-        <th mat-header-cell *matHeaderCellDef></th>
+        <th mat-header-cell *matHeaderCellDef class="text-center"> Editar   /   Eliminar</th>
         <td mat-cell *matCellDef="let row, let index = index">
           <div class="row">
-            <div class="col px-1">
+            <div class="col-12 col-sm-6 text-center px-1">
               <i class="material-icons color-blue cursor-pointer" (click)="openEditMoviePopup(row.id, index)">edit</i>
             </div>
-            <div class="col px-1">
+            <div class="col-12 col-sm-6 text-center px-1">
               <i class="material-icons color-red cursor-pointer" (click)="deleteMovie(row, index)">delete</i>
             </div>
           </div>

@@ -12,8 +12,11 @@ import {
   MatPaginatorModule, MatProgressSpinnerModule, MatSelectModule,
   MatSidenavModule, MatSortModule, MatTableModule,
 } from '@angular/material';
+import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 
 import { DashboardRouting } from './dashboard.routing';
+
+import { CoreModule } from '../../core/core.module';
 
 import { DashboardComponent } from './dashboard.component';
 import { FormMovieComponent } from './components/form-movie/form-movie.component';
@@ -39,6 +42,7 @@ import { ProfilePageComponent } from './components/profilePage/profile-page.comp
 
   ],
   imports: [
+    CoreModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -57,7 +61,10 @@ import { ProfilePageComponent } from './components/profilePage/profile-page.comp
     MatNativeDateModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    MatCardModule
+    MatCardModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule
   ]
 })
 export class DashboardModule { }

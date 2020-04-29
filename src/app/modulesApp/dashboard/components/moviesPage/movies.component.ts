@@ -5,7 +5,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material';
 import Swal from 'sweetalert2';
 
-import { date2String } from 'src/app/core/functions/date.funtions';
 import { DataMovie, MovieDataInterface } from '../../interfaces/movie.interface';
 
 import { PopupNewMovieComponent } from '../popup-new-movie/popup-new-movie.component';
@@ -23,6 +22,7 @@ export class MoviesComponent implements OnInit {
   dataSource: MatTableDataSource<MovieDataInterface>;
   movies: any[];
   showNotification = false;
+  alertMessage = 'Cargando registros';
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -59,7 +59,7 @@ export class MoviesComponent implements OnInit {
         const newMovie = {
           id: result.id,
           nameMovie: result.nameMovie,
-          date: date2String(result.date),
+          date: result.date,
           state: this.isActive(result.state)
         };
 
@@ -84,7 +84,8 @@ export class MoviesComponent implements OnInit {
         this.movies[i] = {
           id: result.id,
           nameMovie: result.nameMovie,
-          date: date2String(result.date),
+          // date: date2String(result.date, 'DD/MM/YYYY hh:mm:SS a'),
+          date: result.date,
           state: this.isActive(result.state)
         };
 
@@ -98,11 +99,13 @@ export class MoviesComponent implements OnInit {
     this.moviesService.getMovies()
       .subscribe(
         (response: MovieDataInterface[]) => {
-          if(response) {
+          if (response) {
             if (response.length === 0) {
               this.showNotification = true;
+              this.alertMessage = 'No hay registros';
               this.setDataMovies(response);
             } else {
+              this.alertMessage = 'Cargando registros';
               this.showNotification = false;
               this.setDataMovies(response);
             }
